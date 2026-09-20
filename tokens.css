@@ -1,0 +1,46 @@
+/* ============================================
+   Aliança — Design Tokens (CSS Custom Properties)
+   Gerado a partir do logotipo (bordô #750B0B + creme #F9F4CF)
+   ============================================ */
+
+:root {
+  /* --- Cores primárias (do logo) --- */
+  --cor-bordo: #750B0B;
+  --cor-creme: #F9F4CF;
+
+  /* --- Escala do bordô --- */
+  --cor-bordo-profundo: #3A0505;
+  --cor-bordo-medio: #962424;
+  --cor-bordo-suave: #C26565;
+  --cor-bordo-claro: #EBC9C9;
+
+  /* --- Neutros quentes --- */
+  --cor-marfim: #FCFAF2;
+  --cor-areia: #EDE4C4;
+  --cor-texto: #2B1A16;
+  --cor-texto-suave: #6B5650;
+
+  /* --- Acento --- */
+  --cor-ouro: #C9A227;
+
+  /* --- Tipografia --- */
+  --fonte-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --fonte-texto: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+
+  /* --- Escala tipográfica --- */
+  --texto-xs: 0.75rem;
+  --texto-sm: 0.875rem;
+  --texto-base: 1rem;
+  --texto-lg: 1.125rem;
+  --texto-xl: 1.35rem;
+  --texto-2xl: 1.75rem;
+  --texto-3xl: 2.25rem;
+  --texto-4xl: 3rem;
+  --texto-5xl: 3.5rem;
+
+  /* --- Espaçamento / forma --- */
+  --raio: 4px;
+  --raio-medio: 8px;
+  --sombra: 0 2px 12px rgba(58, 5, 5, 0.08);
+  --espaco-secao: 5rem;
+}
