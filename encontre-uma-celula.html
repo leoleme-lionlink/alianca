@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Encontre uma célula presencial ou online da Aliança. Protótipo de demonstração com dados fictícios.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://*.tile.openstreetmap.org; connect-src 'self' https://nominatim.openstreetmap.org https://*.tile.openstreetmap.org; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <title>Encontre uma célula — Aliança</title>
+  <link rel="icon" href="imagens/logo-bordo-transparente.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="pages.css">
+  <link rel="stylesheet" href="celulas.css">
+  <script src="vendor/leaflet/leaflet.js" defer></script>
+  <script src="script.js" defer></script>
+  <script src="celulas.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header" data-header>
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Aliança — início"><img src="imagens/logo-bordo-transparente.png" alt="Aliança" width="190" height="61"></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-principal"><span class="sr-only">Abrir menu</span><span></span><span></span><span></span></button>
+      <nav id="menu-principal" class="main-nav" aria-label="Navegação principal">
+        <a href="sobre.html">Sobre</a><a href="participe.html">Participe</a><a aria-current="page" href="encontre-uma-celula.html">Células</a><a href="formacao.html">Formação</a><a href="acao-social.html">Ação Social</a><a href="adoracao.html">Adoração</a><a class="nav-cta" href="contato.html">Venha nos visitar</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="cell-hero">
+      <div class="container cell-hero-grid">
+        <div><p class="eyebrow eyebrow-light">Comunhão que acontece perto</p><h1>Encontre uma <em>célula.</em></h1></div>
+        <div><p>Há um lugar à mesa para você. Procure uma reunião presencial perto de onde está ou encontre uma opção online pelo dia da semana.</p></div>
+      </div>
+    </section>
+
+    <section class="cell-finder" aria-labelledby="finder-title">
+      <div class="container">
+        <div class="demo-alert" role="note"><strong>Protótipo para validação</strong><span>As células, dias e horários desta página são fictícios. Os pontos no mapa são locais públicos reais usados somente para testar a experiência.</span></div>
+        <h2 class="sr-only" id="finder-title">Buscar células</h2>
+        <div class="mode-tabs" role="tablist" aria-label="Modalidade da célula">
+          <button id="tab-presencial" class="mode-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="panel-presencial" data-mode="presencial"><span>01</span> Presencial</button>
+          <button id="tab-online" class="mode-tab" type="button" role="tab" aria-selected="false" aria-controls="panel-online" data-mode="online"><span>02</span> Online</button>
+        </div>
+
+        <section id="panel-presencial" class="mode-panel" role="tabpanel" aria-labelledby="tab-presencial">
+          <div class="search-block">
+            <div><p class="eyebrow">Onde você está?</p><h2>Veja o que está mais perto.</h2></div>
+            <form id="address-form" class="address-form" role="search">
+              <label for="address-input">Rua, CEP, bairro ou cidade</label>
+              <div class="search-row"><input id="address-input" name="endereco" type="search" autocomplete="street-address" placeholder="Ex.: Vila Mariana, São Paulo" required><button class="button button-wine" type="submit">Buscar</button></div>
+              <button id="location-button" class="location-button" type="button"><span aria-hidden="true">◎</span> Usar minha localização</button>
+              <p class="privacy-note">Privacidade: a busca envia o texto digitado ao <a href="https://operations.osmfoundation.org/policies/nominatim/" target="_blank" rel="noopener">Nominatim/OpenStreetMap</a>. Ao usar sua localização, o navegador pede sua permissão e este site não armazena as coordenadas. O mapa envia ao OpenStreetMap a área visualizada, e as fontes são carregadas do Google Fonts; esses provedores recebem a requisição e podem processar seu IP conforme as próprias políticas.</p>
+            </form>
+          </div>
+          <div id="status-message" class="status-message" role="status" aria-live="polite">Exibindo todos os pontos de demonstração em São Paulo.</div>
+          <div class="finder-layout">
+            <div class="results-column"><div class="results-heading"><h3>Resultados</h3><span id="result-count"></span></div><div id="cell-list" class="cell-list"></div></div>
+            <div class="map-column"><div id="cell-map" aria-label="Mapa com pontos de demonstração em São Paulo"></div><p class="map-note">Distâncias em linha reta. Mapa © OpenStreetMap.</p></div>
+          </div>
+        </section>
+
+        <section id="panel-online" class="mode-panel" role="tabpanel" aria-labelledby="tab-online" hidden>
+          <div class="online-intro"><p class="eyebrow">De onde você estiver</p><h2>Escolha o melhor dia.</h2><p>Selecione um dia para visualizar as reuniões online de demonstração.</p></div>
+          <div id="day-filters" class="day-filters" aria-label="Filtrar por dia da semana"></div>
+          <div id="online-list" class="online-list"></div>
+        </section>
+      </div>
+    </section>
+
+    <section class="cell-next-step"><div class="container"><p class="eyebrow eyebrow-light">Antes de participar</p><div><h2>Confirme os detalhes com a nossa equipe.</h2><p>Na versão final, cada encontro terá informações aprovadas pela liderança e um canal seguro para solicitar participação.</p><a class="button button-cream" href="https://wa.me/5511988916868">Falar no WhatsApp <span aria-hidden="true">↗</span></a></div></div></section>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-grid"><a class="footer-brand" href="index.html"><img src="imagens/logo2.png" alt="Aliança" width="180" height="50"></a><p>Amo, Vivo, Sirvo, Sou igreja.</p><div class="footer-links"><a href="sobre.html">Sobre</a><a href="participe.html">Participe</a><a href="encontre-uma-celula.html">Células</a><a href="contato.html">Contato</a></div><div class="footer-bottom"><span>Aliança · Desde 2008</span><span><a href="https://www.instagram.com/ministerio.alianca/">Instagram</a> · <a href="https://www.youtube.com/">YouTube</a> · <a href="https://open.spotify.com/">Spotify</a></span></div></div></footer>
+</body>
+</html>
